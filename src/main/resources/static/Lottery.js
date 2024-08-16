@@ -17,18 +17,18 @@ function Lottery(id, cover, coverType, width, height, drawPercentCallback) {
 
 Lottery.prototype = {
     createElement: function (tagName, attributes) {
-        var ele = document.createElement(tagName);
-        for (var key in attributes) {
+        let ele = document.createElement(tagName);
+        for (let key in attributes) {
             ele.setAttribute(key, attributes[key]);
         }
         return ele;
     },
     getTransparentPercent: function(ctx, width, height) {
-        var imgData = ctx.getImageData(0, 0, width, height),
+        let imgData = ctx.getImageData(0, 0, width, height),
             pixles = imgData.data,
             transPixs = [];
-        for (var i = 0, j = pixles.length; i < j; i += 4) {
-            var a = pixles[i + 3];
+        for (let i = 0, j = pixles.length; i < j; i += 4) {
+            let a = pixles[i + 3];
             if (a < 128) {
                 transPixs.push(i);
             }
@@ -42,7 +42,7 @@ Lottery.prototype = {
     },
     drawPoint: function (x, y) {
         this.maskCtx.beginPath();
-        var radgrad = this.maskCtx.createRadialGradient(x, y, 0, x, y, 30);
+        let radgrad = this.maskCtx.createRadialGradient(x, y, 0, x, y, 30);
         radgrad.addColorStop(0, 'rgba(0,0,0,0.6)');
         radgrad.addColorStop(1, 'rgba(255, 255, 255, 0)');
         this.maskCtx.fillStyle = radgrad;
@@ -53,10 +53,10 @@ Lottery.prototype = {
         }
     },
     bindEvent: function () {
-        var _this = this;
-        var device = (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));
-        var clickEvtName = device ? 'touchstart' : 'mousedown';
-        var moveEvtName = device? 'touchmove': 'mousemove';
+        let _this = this;
+        let device = (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));
+        let clickEvtName = device ? 'touchstart' : 'mousedown';
+        let moveEvtName = device? 'touchmove': 'mousemove';
         if (!device) {
             var isMouseDown = false;
             document.addEventListener('mouseup', function(e) {
@@ -74,15 +74,15 @@ Lottery.prototype = {
         }
         this.mask.addEventListener(clickEvtName, function (e) {
             isMouseDown = true;
-            var docEle = document.documentElement;
+            let docEle = document.documentElement;
             if (!_this.clientRect) {
                 _this.clientRect = {
                     left: 0,
                     top:0
                 };
             }
-            var x = (device ? e.touches[0].clientX : e.clientX) - _this.clientRect.left + docEle.scrollLeft - docEle.clientLeft;
-            var y = (device ? e.touches[0].clientY : e.clientY) - _this.clientRect.top + docEle.scrollTop - docEle.clientTop;
+            let x = (device ? e.touches[0].clientX : e.clientX) - _this.clientRect.left + docEle.scrollLeft - docEle.clientLeft;
+            let y = (device ? e.touches[0].clientY : e.clientY) - _this.clientRect.top + docEle.scrollTop - docEle.clientTop;
             _this.drawPoint(x, y);
         }, false);
 
@@ -90,15 +90,15 @@ Lottery.prototype = {
             if (!device && !isMouseDown) {
                 return false;
             }
-            var docEle = document.documentElement;
+            let docEle = document.documentElement;
             if (!_this.clientRect) {
                 _this.clientRect = {
                     left: 0,
                     top:0
                 };
             }
-            var x = (device ? e.touches[0].clientX : e.clientX) - _this.clientRect.left + docEle.scrollLeft - docEle.clientLeft;
-            var y = (device ? e.touches[0].clientY : e.clientY) - _this.clientRect.top + docEle.scrollTop - docEle.clientTop;
+            let x = (device ? e.touches[0].clientX : e.clientX) - _this.clientRect.left + docEle.scrollLeft - docEle.clientLeft;
+            let y = (device ? e.touches[0].clientY : e.clientY) - _this.clientRect.top + docEle.scrollTop - docEle.clientTop;
             _this.drawPoint(x, y);
         }, false);
     },
@@ -121,7 +121,7 @@ Lottery.prototype = {
         this.maskCtx = this.maskCtx || this.mask.getContext('2d');
 
         if (this.lotteryType == 'image') {
-            var image = new Image(),
+            let image = new Image(),
                 _this = this;
             image.onload = function () {
                 _this.width = this.width;
@@ -140,7 +140,7 @@ Lottery.prototype = {
             this.backCtx.fillRect(0, 0, this.width, this.height);
             this.backCtx.restore();
             this.backCtx.save();
-            var fontSize = 30;
+            let fontSize = 30;
             this.backCtx.font = 'Bold ' + fontSize + 'px Arial';
             this.backCtx.textAlign = 'center';
             this.backCtx.fillStyle = '#F60';
@@ -156,7 +156,7 @@ Lottery.prototype = {
             this.maskCtx.fillRect(0, 0, this.width, this.height);
             this.maskCtx.globalCompositeOperation = 'destination-out';
         } else if (this.coverType == 'image'){
-            var image = new Image(),
+            let image = new Image(),
                 _this = this;
             image.onload = function () {
                 _this.maskCtx.drawImage(this, 0, 0);
