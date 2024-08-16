@@ -19,14 +19,6 @@ public class LogServiceImpl implements LogService {
         this.markerLogRepo = markerLogRepo;
     }
 
-    private void onInit() {
-
-    }
-
-    private void postDestroy() {
-
-    }
-
     @Override
     public void createMarkerLog(User user, String marker) {
         MarkerLog log = new MarkerLog(marker, user);
