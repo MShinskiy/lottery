@@ -1,32 +1,50 @@
 package com.lavkatech.lottery.entity.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.lavkatech.lottery.entity.enumeration.Group;
+import com.lavkatech.lottery.entity.enumeration.Level;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Data
 public class DecodedUserQuery {
 
     @JsonProperty("Timestamp")
-    public LocalDateTime timestamp;
-
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime timestamp;
     @JsonProperty("User")
-    public UserQueryProperty user;
+    private UserQueryProperty user;
+
+    public LocalDateTime getTimestamp() {
+        return this.timestamp;
+    }
+
+    public String getDtprf() {
+        return this.user.getContact().getDtprf();
+    }
+
+    public Group getGroup() {
+        return Group.valueOf(this.user.getContact().getGroup());
+    }
+
+    public Level getLevel() {
+        return Level.valueOf(this.user.getContact().getLevel());
+    }
 }
 
 @Data
 class UserQueryProperty {
     @JsonProperty("Contact")
-    public ContactQueryProperty contact;
+    private ContactQueryProperty contact;
 }
 
 @Data
 class ContactQueryProperty {
     @JsonProperty("DTE_Contact_Id__c")
-    public String dtprf;
+    private String dtprf;
     @JsonProperty("mapID")
-    public String group;
+    private String group;
     @JsonProperty("levelSA")
-    public String level;
+    private String level;
 }

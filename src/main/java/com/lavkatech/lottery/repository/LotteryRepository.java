@@ -9,6 +9,4 @@ import java.util.UUID;
 
 @Repository
 public interface LotteryRepository extends JpaRepository<Lottery, UUID> {
-
-    Optional<Lottery> findFirst();
 }

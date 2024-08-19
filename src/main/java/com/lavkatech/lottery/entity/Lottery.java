@@ -23,6 +23,6 @@ public class Lottery {
 
     @Column(name = "total_winnings")
     private long totalWinnings;
-    @Column(name = "order", columnDefinition = "BIGINT")
+    @Column(name = "order_number", columnDefinition = "BIGINT")
     private AtomicLong currentOrder;
 }

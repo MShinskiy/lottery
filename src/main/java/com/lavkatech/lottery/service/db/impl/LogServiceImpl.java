@@ -6,6 +6,7 @@ import com.lavkatech.lottery.entity.User;
 import com.lavkatech.lottery.repository.LotteryLogRepository;
 import com.lavkatech.lottery.repository.MarkerLogRepository;
 import com.lavkatech.lottery.service.db.LogService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,6 +15,7 @@ public class LogServiceImpl implements LogService {
     private final LotteryLogRepository lotteryLogRepo;
     private final MarkerLogRepository markerLogRepo;
 
+    @Autowired
     public LogServiceImpl(LotteryLogRepository lotteryLogRepo, MarkerLogRepository markerLogRepo) {
         this.lotteryLogRepo = lotteryLogRepo;
         this.markerLogRepo = markerLogRepo;

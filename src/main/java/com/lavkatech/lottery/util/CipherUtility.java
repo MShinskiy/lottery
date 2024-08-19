@@ -2,10 +2,12 @@ package com.lavkatech.lottery.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.lavkatech.lottery.entity.dto.DecodedUserQuery;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.tomcat.util.codec.binary.Base64;
+import org.springframework.boot.autoconfigure.jackson.JacksonProperties;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
@@ -19,10 +21,11 @@ public class CipherUtility {
     public static DecodedUserQuery encodedStringToPojo(String query, String initVector, String key)  {
         String queryJson = unwrapEncodedString(query, initVector, key);
         ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
         try {
             return mapper.readValue(queryJson, DecodedUserQuery.class);
         } catch (JsonProcessingException e) {
-            log.error("Invalid JSON for encoded query: {}", queryJson);
+            log.error("Invalid JSON for encoded query: {}", queryJson, e);
             return null;
         }
     }

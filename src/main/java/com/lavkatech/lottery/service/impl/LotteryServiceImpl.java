@@ -21,7 +21,9 @@ public class LotteryServiceImpl implements LotteryService {
 
     @PostConstruct
     private void afterInit() {
-        lottery = lotteryRepo.findFirst()
+        lottery = lotteryRepo.findAll()
+                .stream()
+                .findFirst()
                 .orElseGet(Lottery::new);
     }
 
@@ -31,7 +33,7 @@ public class LotteryServiceImpl implements LotteryService {
     }
 
     @Override
-    public long getValue() {
+    public long getLotteryResult() {
         return calcWinning.apply(
                 lottery.getCurrentOrder()
                         .getAndIncrement()

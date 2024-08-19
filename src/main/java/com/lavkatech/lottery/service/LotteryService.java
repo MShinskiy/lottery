@@ -20,5 +20,5 @@ public interface LotteryService {
         return 0L;
     };
 
-    long getValue();
+    long getLotteryResult();
 }
