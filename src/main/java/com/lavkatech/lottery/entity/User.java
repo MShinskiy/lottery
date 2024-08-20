@@ -19,7 +19,9 @@ public class User {
 
     // Группа пользователей
     @Column(name = "user_group")
+    @Enumerated(EnumType.STRING)
     private Group group;
+    @Enumerated(EnumType.STRING)
     @Column(name = "user_level")
     private Level level;
 

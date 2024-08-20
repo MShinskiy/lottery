@@ -1,5 +1,7 @@
 package com.lavkatech.lottery.service;
 
+import com.lavkatech.lottery.entity.Lottery;
+import com.lavkatech.lottery.entity.dto.LotteryResult;
 import org.springframework.stereotype.Service;
 
 import java.util.function.Function;
@@ -20,5 +22,7 @@ public interface LotteryService {
         return 0L;
     };
 
-    long getLotteryResult();
+    LotteryResult getLotteryResult();
+
+    Lottery getLotteryEntity();
 }

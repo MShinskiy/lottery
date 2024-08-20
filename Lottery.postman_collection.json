@@ -1,0 +1,148 @@
+{
+	"info": {
+		"_postman_id": "9cd52095-c232-4ccc-b397-c5601e4d9220",
+		"name": "Lottery",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31685876"
+	},
+	"item": [
+		{
+			"name": "GetUserInfo",
+			"protocolProfileBehavior": {
+				"disableUrlEncoding": false
+			},
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Token",
+						"value": "{{token}}",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/users/:dtprf",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"users",
+						":dtprf"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"disabled": true
+						}
+					],
+					"variable": [
+						{
+							"key": "dtprf",
+							"value": "{{dtprf}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ProcessLotterry",
+			"request": {
+				"auth": {
+					"type": "apikey"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/lotteries",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"lotteries"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "{{token}}",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "Token",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "JwJWamF432UmpbwPgp85rNEqzLGG+jZDGUS7/Z1gOW/HHkRV/Y/kqZDyp5K/hbnH/iIDDcynsG5oZLfen/V/IaPccApoN7d3akN2dJXLkotr+Sl/qgazsrF1lxVTqcI3MgtteYPbvHR4T7vvCjRkgsIvhsr4Y27WXAEkcSsy2raHcX5QKVDNHHM2bijNNG41s9U+W0R9z4fBXAr32F1lgV1w0yyfrLv95iZDPN2PR9M=",
+			"type": "string"
+		},
+		{
+			"key": "dtprf",
+			"value": "DTPRF12345678",
+			"type": "string"
+		}
+	]
+}

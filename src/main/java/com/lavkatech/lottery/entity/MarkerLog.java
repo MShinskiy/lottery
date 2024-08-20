@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Data
 @Entity
-@Table(name = "markers")
+@Table(name = "history_markers")
 @NoArgsConstructor
 public class MarkerLog {
 

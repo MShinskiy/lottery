@@ -13,8 +13,9 @@ import java.util.function.Predicate;
 public class Lottery {
 
     public Lottery() {
-        this.totalWinnings = 0;
-        this.currentOrder = new AtomicLong(1);
+        this.totalWinnings = 0L;
+        //this.currentOrder = new AtomicLong(1);
+        this.currentOrder = 0L;
     }
 
     @Id
@@ -23,6 +24,10 @@ public class Lottery {
 
     @Column(name = "total_winnings")
     private long totalWinnings;
-    @Column(name = "order_number", columnDefinition = "BIGINT")
-    private AtomicLong currentOrder;
+    @Column(name = "order_number"/*, columnDefinition = "BIGINT"*/)
+    private long currentOrder;
+
+    public void incrementOrder() {
+        this.currentOrder++;
+    }
 }

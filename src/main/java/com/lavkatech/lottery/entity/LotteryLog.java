@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Data
 @Entity
-@Table(name = "lotteries")
+@Table(name = "history_lotteries")
 @NoArgsConstructor
 public class LotteryLog {
 

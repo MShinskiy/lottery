@@ -31,4 +31,13 @@ public class UserServiceImpl implements UserService {
         return userRepo.findByGroupAndLevel(group, level);
     }
 
+    @Override
+    public void useTicket(String dtprf) throws UserNotFoundException, IllegalArgumentException {
+        User user = loadUser(dtprf);
+        if(user.getTickets() < 1)
+            throw new IllegalArgumentException("No tickets available for user[dtprf=" + dtprf + "].");
+        user.setTickets(user.getTickets() - 1);
+        userRepo.save(user);
+    }
+
 }

@@ -12,4 +12,5 @@ import java.util.List;
 public interface UserService {
     User loadUser(String dtprf) throws UserNotFoundException;
     List<User> loadGroup(Group group, Level level);
+    void useTicket(String dtprf) throws UserNotFoundException, IllegalArgumentException ;
 }

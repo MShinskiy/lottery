@@ -21,7 +21,6 @@ public class WebController {
     @GetMapping("/home")
     public String enterLotteryPage(@RequestParam String query, @RequestParam(required = false) String marker) {
         DecodedUserQuery decodedQuery = CipherUtility.encodedStringToPojo(query, initVector, key);
-
         return "index";
     }
 
