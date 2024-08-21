@@ -6,36 +6,29 @@ import com.lavkatech.lottery.repository.LotteryRepository;
 import com.lavkatech.lottery.service.LotteryService;
 import com.lavkatech.lottery.service.db.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.sql.SQLException;
 
 @Service
 public class LotteryServiceImpl implements LotteryService {
 
     private final LotteryRepository lotteryRepo;
-    private final LogService logService;
-    //private Lottery lottery;
 
     @Autowired
-    public LotteryServiceImpl(LotteryRepository lotteryRepo, LogService logService) {
+    public LotteryServiceImpl(LotteryRepository lotteryRepo) {
         this.lotteryRepo = lotteryRepo;
-        this.logService = logService;
     }
 
-/*    @PostConstruct
-    private void afterInit() {
-        lottery = lotteryRepo.findAll()
-                .stream()
-                .findFirst()
-                .orElseGet(Lottery::new);
-    }
 
-    @PreDestroy
-    private void beforeDestroy() {
-        lotteryRepo.save(lottery);
-    }*/
-
+    @Retryable(retryFor = SQLException.class, // в случае ошибки
+            maxAttempts = 5, // Макс. кол-во попыток
+            backoff = @Backoff(delay = 100L) // промежуток времени между попытками
+    )
     @Transactional(isolation = Isolation.SERIALIZABLE)
     @Override
     public LotteryResult getLotteryResult() {

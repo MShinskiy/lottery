@@ -8,7 +8,9 @@ import com.lavkatech.lottery.repository.UserRepository;
 import com.lavkatech.lottery.service.db.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -38,6 +40,12 @@ public class UserServiceImpl implements UserService {
             throw new IllegalArgumentException("No tickets available for user[dtprf=" + dtprf + "].");
         user.setTickets(user.getTickets() - 1);
         userRepo.save(user);
+    }
+
+    @Transactional
+    @Override
+    public void saveUsers(Collection<? extends User> users) {
+        userRepo.saveAllAndFlush(users);
     }
 
 }

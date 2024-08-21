@@ -6,11 +6,13 @@ import com.lavkatech.lottery.entity.enumeration.Level;
 import com.lavkatech.lottery.exception.UserNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 
 @Service
 public interface UserService {
     User loadUser(String dtprf) throws UserNotFoundException;
     List<User> loadGroup(Group group, Level level);
-    void useTicket(String dtprf) throws UserNotFoundException, IllegalArgumentException ;
+    void useTicket(String dtprf) throws UserNotFoundException, IllegalArgumentException;
+    void saveUsers(Collection<? extends User> users);
 }

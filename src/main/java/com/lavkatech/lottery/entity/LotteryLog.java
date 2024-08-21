@@ -32,7 +32,7 @@ public class LotteryLog {
     private long value;
 
     // Кто открыл
-    @ManyToOne(cascade = {CascadeType.PERSIST})
+    @ManyToOne
     private User openedBy;
     // Когда открыл
     private LocalDateTime openedOn;

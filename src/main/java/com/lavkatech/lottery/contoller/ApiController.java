@@ -3,7 +3,7 @@ package com.lavkatech.lottery.contoller;
 import com.lavkatech.lottery.entity.User;
 import com.lavkatech.lottery.entity.dto.DecodedUserQuery;
 import com.lavkatech.lottery.entity.dto.LotteryResult;
-import com.lavkatech.lottery.entity.dto.UserInfo;
+import com.lavkatech.lottery.entity.dto.UserDto;
 import com.lavkatech.lottery.exception.UserNotFoundException;
 import com.lavkatech.lottery.service.LotteryService;
 import com.lavkatech.lottery.service.db.LogService;
@@ -17,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.Objects;
 
 @RestController
@@ -53,9 +54,9 @@ public class ApiController {
         // Использовать билет
         User user;
         try {
-            user = userService.loadUser(duq.getDtprf());
-            userService.useTicket(duq.getDtprf());
-            log.debug("User[dtprf={}] uses a ticket.", duq.getDtprf());
+            user = userService.loadUser(duq.dtprf());
+            userService.useTicket(duq.dtprf());
+            log.debug("User[dtprf={}] uses a ticket.", duq.dtprf());
         } catch (UserNotFoundException e) {
             log.debug(e.getMessage());
             // Пользователь не найден
@@ -68,6 +69,7 @@ public class ApiController {
 
         // Получить выигрыш
         LotteryResult res = lotteryService.getLotteryResult();
+
         logService.createLotteryLog(user, res.value(), res.order());
         return ResponseEntity
                 .ok(res);
@@ -77,14 +79,14 @@ public class ApiController {
     public ResponseEntity<Object> getUserInfo(@RequestHeader("Token") String token, @PathVariable String dtprf) {
         // Получить токен пользователя
         DecodedUserQuery duq = CipherUtility.encodedStringToPojo(token, initVector, key);
-        if(duq == null || !Objects.equals(dtprf, duq.getDtprf()))
+        if(duq == null || !Objects.equals(dtprf, duq.dtprf()))
             return ResponseEntity
                     .status(HttpStatus.UNAUTHORIZED)
                     .build();
         try {
             // Загрузить информацию о пользователе
             User user = userService.loadUser(dtprf);
-            UserInfo body = UserInfo.createFrom(user);
+            UserDto body = UserDto.createFrom(user);
             return ResponseEntity
                     .ok(body);
         } catch (UserNotFoundException e) {
