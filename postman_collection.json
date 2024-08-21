@@ -89,6 +89,30 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "GenerateTestUsers",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/dev/users?vu=1000",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"dev",
+						"users"
+					],
+					"query": [
+						{
+							"key": "vu",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"auth": {
