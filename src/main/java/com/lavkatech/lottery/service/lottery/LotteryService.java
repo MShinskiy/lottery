@@ -1,9 +1,10 @@
-package com.lavkatech.lottery.service;
+package com.lavkatech.lottery.service.lottery;
 
 import com.lavkatech.lottery.entity.Lottery;
 import com.lavkatech.lottery.entity.dto.LotteryResult;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.function.Function;
 
 @Service
@@ -22,7 +23,7 @@ public interface LotteryService {
         return 0L;
     };
 
-    LotteryResult getLotteryResult();
+    LotteryResult getLotteryResult() throws SQLException;
 
     Lottery getLotteryEntity();
 }

@@ -1,0 +1,651 @@
+:root {
+    --primary: rgb(122, 120, 170);
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    user-select: none;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+.bg-page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.bg-page::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(4px);
+    background-color: rgba(0, 0, 0, 0.1);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.bg-page img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+    position: relative;
+}
+
+body {
+    line-height: 1;
+    position: relative;
+    font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+img {
+    width: 100%;
+    height: 100%;
+}
+b {
+    font-weight: bold;
+}
+.container {
+    width: calc(100% - 32px);
+    padding: 8px 16px;
+}
+.container2 {
+    width: calc(100% - 32px);
+    padding: 8px 16px;
+}
+.nav-btn {
+    width: 100px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgb(242, 242, 242);
+    padding: 8px 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 8px;
+}
+.nav-btn-img {
+    width: 20px;
+}
+.nav-btn-img img{
+    width: 100%;
+    transform: rotate(180deg);
+}
+.main-head {
+    width: 100%;
+    text-align: center;
+    color: rgb(242, 242, 242);;
+    font-weight: bold;
+    background: var(--primary);
+}
+.second-head {
+    width: 100%;
+    text-align: center;
+}
+.card-block {
+    width: calc(100% - 16px);
+    background: rgb(242, 242, 242);
+    border-radius: 16px;
+    padding: 8px;
+    margin-bottom: 20px;
+}
+.card-block-bilet {
+    background: transparent;
+    position: relative;
+    padding: 80px 0;
+}
+.back-img {
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    transform: translate(-24px, -35%);
+    width: 320px;
+}
+.card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;  
+    margin-bottom: 0.2rem; 
+}
+.card-head-intro {
+    display: flex;
+    align-items: center;
+    gap: 15px;  
+}
+.card-head-img {
+    width: 52px;
+    height: 52px;
+}
+.card-head-text {
+    font-weight: bold;
+}
+.card-head-info {
+    background: var(--primary);
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    position: relative;
+}
+.card-head-info img {
+    width: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.card-btn {
+    display: flex;
+    justify-content: center;
+}
+.card-btn-btn {
+    font-weight: bold;
+    padding: 8px 32px;
+    background: rgb(150, 225, 112);
+    border-radius: 8px;
+    border: 1px solid var(--primary);
+    margin: 0.5em 0;
+}
+.card-progressbar {
+    width: 90%;
+    margin: 0 auto;
+}
+.card-progressbar-count {
+    display: flex;
+    justify-content: space-between;
+    font-size: 2rem;
+}
+.card-progressbar-progressbar {
+    width: 100%;
+    height: 16px;
+    background: rgb(215, 228, 189);
+    border: 1px solid #000;
+    margin-bottom: 10px;
+    position: relative;
+}
+.card-progressbar-fill {
+    height: 100%;
+    background-color: var(--primary);
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-right: 1px solid #000;
+}
+.bilet-block-head {
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+.bilet-block-cards {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+.bilet-block-card {
+    width: 43%;
+    background: rgb(242, 242, 242);
+    border-radius: 16px;
+    padding: 8px;
+}
+.bilet-block-card-head {
+    margin-bottom: 4px;
+}
+.bilet-block-card-count {
+    font-size: 2rem;
+    font-weight: bold;
+}
+.bilet-block-ball {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.bilet-block-ball-count {
+    font-size: 2rem;
+}
+.main-btn-block {
+    padding-bottom: 8px;
+}
+.main-btn {
+    background: rgb(242, 242, 242);
+    width: calc(100% - 64px);
+    margin: 0 auto;
+    text-align: center;
+    padding: 16px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 16px;
+}
+.info-modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+
+}
+.info-modal-back {
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    background: #04040492;
+}
+.info-modal-contant {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: rgb(220, 230, 242);
+    border-radius: 32px;
+    border: 2px solid var(--primary);
+    width: calc(100% - 64px);
+    transform: translate(-50%, -70%);
+    overflow: hidden;
+}
+.info-modal-contant-section {
+    padding: 16px 16px;
+}
+.info-modal-contant-section-head {
+    font-size: 1.2rem;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-transform: uppercase;
+}
+.info-modal-contant-section-text {
+    text-align: left;
+}
+
+.info-modal-contant-section-two {
+    background: rgb(242, 242, 242);
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+}
+.btnTime {
+    background: grey;
+}
+.btnchallenge {
+    background: var(--primary);
+    border: 1px solid rgb(150, 225, 112);
+}
+.second-modal {
+    width: 100%;
+    transform: translateY(0);
+    background: transparent;
+}
+.SecondModalActive {
+    transform: translateY(0);
+    transition: 1s;
+    z-index: 100;
+}
+.accordion-head {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    margin-bottom: 16px;
+}
+.accordion-content {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+}
+.btn-update {
+    position: relative;
+    text-align: center;
+    padding: 16px 8px;
+    width: 100%;
+    top: 160px;
+}
+.text-green {
+    color: rgb(3, 176, 3);
+}
+.lucky-message {
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    border-radius: 8px;
+    z-index: 1;
+    top: 90px;
+    height: 40px;
+    width: 100%;
+}
+.lucky-message.luck {
+    background-color: #a9d18e;
+}
+#app {
+    position: relative;
+	background: transparent;
+    height: 100%;
+}
+.lucky-message.unluck {
+    background-color: #b4c7e7;
+}
+.challenge-done {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: #9ce64d;
+    border-radius: 16px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+
+/* Снежинки */
+.snow {
+	position: absolute;
+    pointer-events: none;
+    height: 95vh;
+	width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 128;
+}
+
+.fa-snowflake {
+	color: #ecf2f8;
+}
+
+.snowflake {
+	animation-name: fall, shake;
+	animation-duration: 10s, 5s;
+	animation-timing-function: linear, ease-in-out;
+	animation-iteration-count: infinite, infinite;
+	position: absolute;
+	left: 200px;
+    height: 16px;
+    width: 16px;
+	z-index: 7;
+	filter: blur(0.5px);
+}
+
+.snowflake1 {
+	animation-name: fall, shake;
+	animation-duration: 10s, 3s;
+	animation-timing-function: linear, ease-in-out;
+	animation-iteration-count: infinite, infinite;
+	position: absolute;
+	left: 500px;
+	top: -100px;
+    height: 16px;
+    width: 16px;
+	animation-delay: 1s, 1s;
+	z-index: 7;
+	filter: blur(0.5px);
+}
+
+.snowflake2 {
+	animation-name: fall, shake;
+	animation-duration: 8s, 5s;
+	animation-timing-function: linear, ease-in-out;
+	animation-iteration-count: infinite, infinite;
+	position: absolute;
+	left: 20px;
+	top: -100px;
+    height: 16px;
+    width: 16px;
+	animation-delay: 2s, 2s;
+	z-index: 7;
+	filter: blur(0.5px);
+}
+
+.snowflake3 {
+	animation-name: fall, shake;
+	animation-duration: 9s, 5s;
+	animation-timing-function: linear, ease-in-out;
+	animation-iteration-count: infinite, infinite;
+	position: absolute;
+	right: 170px;
+	top: -100px;
+    height: 16px;
+    width: 16px;
+	animation-delay: 3s, 5s;
+	z-index: 5;
+	filter: blur(0.7px);
+}
+
+.snowflake4 {
+	animation-name: fall, shake;
+	animation-duration: 15s, 5s;
+	animation-timing-function: linear, ease-in-out;
+	animation-iteration-count: infinite, infinite;
+	position: absolute;
+	right: 430px;
+    height: 16px;
+    width: 16px;
+	top: -100px;
+	animation-delay: 4s, 4s;
+	z-index: 5;
+}
+
+.snowflake5 {
+	animation-name: fall, shake;
+	animation-duration: 15s, 4s;
+	animation-timing-function: linear, ease-in-out;
+	animation-iteration-count: infinite, infinite;
+	position: absolute;
+	left: 500px;
+	top: -100px;
+	animation-delay: 6s, 2s;
+    height: 24px;
+    width: 24px;
+	z-index: 6;
+	filter: blur(0.5px);
+}
+
+.snowflake6 {
+	animation-name: fall, shake;
+	animation-duration: 12s, 5s;
+	animation-timing-function: linear, ease-in-out;
+	animation-iteration-count: infinite, infinite;
+	position: absolute;
+	left: 75px;
+	top: -100px;
+	animation-delay: 3.2s, 2s;
+    height: 24px;
+    width: 24px;
+	z-index: 6;
+}
+
+.snowflake7 {
+	animation-name: fall, shake;
+	animation-duration: 11s, 5s;
+	animation-timing-function: linear, ease-in-out;
+	animation-iteration-count: infinite, infinite;
+	position: absolute;
+	left: 650px;
+    height: 16px;
+    width: 16px;
+	top: -100px;
+	animation-delay: 7.2s, 1s;
+	z-index: 7;
+}
+
+.snowflake8 {
+	animation-name: fall, shake;
+	animation-duration: 12s, 4s;
+	animation-timing-function: linear, ease-in-out;
+	animation-iteration-count: infinite, infinite;
+	position: absolute;
+	left: 820px;
+	top: -100px;
+	animation-delay: 4s, 2s;
+    height: 24px;
+    width: 24px;
+	z-index: 5;
+	filter: blur(0.5px);
+}
+
+.snowflake9 {
+	animation-name: fall, shake;
+	animation-duration: 12s, 4s;
+	animation-timing-function: linear, ease-in-out;
+	animation-iteration-count: infinite, infinite;
+	position: absolute;
+	left: 170px;
+	top: -100px;
+	animation-delay: 5s, 2s;
+    height: 24px;
+    width: 24px;
+	z-index: 5;
+	filter: blur(0.3px);
+}
+
+.snowflake10 {
+	animation-name: fall, shake;
+	animation-duration: 15s, 9s;
+	animation-timing-function: linear, ease-in-out;
+	animation-iteration-count: infinite, infinite;
+	position: absolute;
+	left: 350px;
+	top: -100px;
+	animation-delay: 2.7s, 2s;
+    height: 32px;
+    width: 32px;
+	z-index: 7;
+}
+
+.snowflake11 {
+	animation-name: fall, shake;
+	animation-duration: 12s, 7s;
+	animation-timing-function: linear, ease-in-out;
+	animation-iteration-count: infinite, infinite;
+	position: absolute;
+	right: 400px;
+	top: -100px;
+	animation-delay: 0.5s, 2s;
+    height: 32px;
+    width: 32px;
+	z-index: 7;
+}
+
+.snowflake12 {
+	/*small*/
+	animation-name: fall, shake;
+	animation-duration: 12s, 5s;
+	animation-timing-function: linear, ease-in-out;
+	animation-iteration-count: infinite, infinite;
+	position: absolute;
+	left: 470px;
+	top: -100px;
+    height: 16px;
+    width: 16px;
+	animation-delay: 5s, 2s;
+	z-index: 7;
+	filter: blur(0.9px);
+}
+
+.snowflake13 {
+	/*small*/
+	animation-name: fall, shake;
+	animation-duration: 10s, 5s;
+	animation-timing-function: linear, ease-in-out;
+	animation-iteration-count: infinite, infinite;
+	position: absolute;
+	right: 220px;
+    height: 16px;
+    width: 16px;
+	top: -100px;
+	animation-delay: 1s, 2s;
+	z-index: 7;
+	filter: blur(0.6px);
+}
+
+.snowflake14 {
+	/*small*/
+	animation-name: fall, shake;
+	animation-duration: 9s, 4s;
+	animation-timing-function: linear, ease-in-out;
+	animation-iteration-count: infinite, infinite;
+	position: absolute;
+	right: 140px;
+	top: -100px;
+	animation-delay: 2s, 2s;
+    height: 16px;
+    width: 16px;
+	z-index: 7;
+	filter: blur(0.5px);
+}
+
+@keyframes fall {
+	0% {
+		top: -10%;
+        opacity: 0;
+	}
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+	100% {
+		top: 100%;
+        opacity: 0;
+	}
+}

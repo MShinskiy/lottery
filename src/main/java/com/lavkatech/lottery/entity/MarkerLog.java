@@ -1,34 +1,34 @@
 package com.lavkatech.lottery.entity;
 
+import com.lavkatech.lottery.reporting.dto.ChallengeExportDto;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-import java.util.UUID;
+import java.time.format.DateTimeFormatter;
 
-@Data
+@Getter
 @Entity
 @Table(name = "history_markers")
 @NoArgsConstructor
-public class MarkerLog {
+public class MarkerLog extends Log{
 
     public MarkerLog(String marker, User entryBy) {
+        super(entryBy);
         this.marker = marker;
-        this.entryBy = entryBy;
-        this.entryOn = LocalDateTime.now();
     }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
 
     // Маркер подтверждения
     private String marker;
 
-    // Кто вошел
-    @ManyToOne
-    private User entryBy;
-    // Когда вошел
-    private LocalDateTime entryOn;
+    @Override
+    public ChallengeExportDto toDto() {
+        return new ChallengeExportDto(
+                getEntryBy().getDtprf(),
+                getEntryOn().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")),
+                getEntryOn().format(DateTimeFormatter.ofPattern("HH:mm:ss")),
+                marker,
+                getEntryOn().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss.SSSSSS"))
+        );
+    }
 }

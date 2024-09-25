@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!--<meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>-->
+    <title>Управление данными</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+    <!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+                integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+                crossorigin="anonymous"
+                referrerpolicy="no-referrer">
+        </script>-->
+</head>
+<body>
+
+<div class="d-flex justify-content-center" style="margin: 10px 0 10px 0">
+    <form method="get">
+        <button class="btn btn-info" th:formaction="@{/administration/edit}">К панели редактирования</button>
+        <button class="btn btn-secondary" th:method="post" th:formaction="@{/logout}">Выход</button>
+    </form>
+</div>
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col col-lg-2 w-25">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Импортировать данные</h5>
+                    <form method="post" th:action="@{/admin/import}" enctype="multipart/form-data">
+                        <div class="input-group mb-3 justify-content-center">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="select-import-type">Тип</label>
+                            </div>
+                            <select class="custom-select" id="select-import-type" name="import-type">
+                                <option disabled selected value> -- выберите опцию --</option>
+                                <option th:each="importType : ${T(com.lavkatech.lottery.reporting.enumeration.ImportType).values()}"
+                                        th:text="${importType.value()}"
+                                        th:value="${importType.name()}">
+                                </option>
+                            </select>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="custom-file">
+                                <label class="input-group-text" for="fileInput">Загрузить</label>
+                                <input class="form-control" id="fileInput" type="file" name="file" accept=".xlsx">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Импорт</button>
+                    </form>
+                </div>
+                <div class="card-footer text-muted" th:if="${msgUld != null}">
+                    <span th:text="${msgUld}"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-auto">
+        </div>
+        <div class="col col-lg-2 w-25">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Экспортировать отчет</h5>
+                    <form method="get" th:action="@{/admin/export}">
+                        <div class="input-group mb-3 justify-content-center">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="select-import-type">Тип</label>
+                            </div>
+                            <select class="custom-select" id="select-export-type" name="export-type">
+                                <option disabled selected value> -- выберите опцию --</option>
+                                <option th:each="exportType : ${T(com.lavkatech.lottery.reporting.enumeration.ExportType).values()}"
+                                        th:text="${exportType.value()}"
+                                        th:value="${exportType.name()}">
+                                </option>
+                            </select>
+                        </div>
+                        <div class="input-group mb-3 justify-content-center">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="select-import-type">Месяц</label>
+                            </div>
+                            <select class="custom-select" id="select-export-month" name="export-month">
+                                <option disabled selected value> -- выберите опцию --</option>
+                                <option th:each="month : ${T(com.lavkatech.lottery.reporting.enumeration.Month).values()}"
+                                        th:text="${month.fullname()}"
+                                        th:value="${month.name()}">
+                                </option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Экспорт</button>
+                    </form>
+                </div>
+                <div class="card-footer text-muted" th:if="${msgDwld != null}">
+                    <span th:text="${msgDwld}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-md-center mt-3">
+        <div class="col col-lg-2 w-100">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Группа</th>
+                    <th>Уровень</th>
+                    <th>Старый маркер</th>
+                    <th>Старая дата окончания</th>
+                    <th>Новый маркер</th>
+                    <th>Новая дата окончания</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="marker, stat : ${markers}">
+                    <td>
+                        <form th:id="'form' + ${stat.index}" method="post">
+                            <input th:form="'form' + ${stat.index}" type="text" class="form-control"
+                                   th:value="${marker.group}" name="group" readonly>
+                        </form>
+                    </td>
+                    <td>
+                        <input th:form="'form' + ${stat.index}" type="text" class="form-control"
+                               th:value="${marker.level}" name="level" readonly>
+                    </td>
+                    <td>
+                        <input type="text" th:value="${marker.marker}" disabled>
+                    </td>
+                    <td>
+                        <input type="date" class="form-control" th:value="${marker.expOn}" disabled/>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control"
+                               th:form="'form' + ${stat.index}"
+                               name="marker"/>
+                    </td>
+                    <td>
+                        <input type="date" class="form-control"
+                               th:form="'form' + ${stat.index}"
+                               name="date"/>
+                    </td>
+                    <td>
+                        <input type="submit" class="btn btn-primary"
+                               th:form="'form' + ${stat.index}"
+                               th:formaction="@{/admin/markers}"
+                               value="Обновить"/>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

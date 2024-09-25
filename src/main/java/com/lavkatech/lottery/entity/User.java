@@ -14,6 +14,7 @@ import java.util.List;
 @Table(name = "users")
 @Data
 public class User {
+
     @Id
     @Setter(AccessLevel.NONE)
     private String dtprf;
@@ -22,20 +23,60 @@ public class User {
     @Column(name = "user_group")
     @Enumerated(EnumType.STRING)
     private Group group;
-    @Enumerated(EnumType.STRING)
     @Column(name = "user_level")
+    @Enumerated(EnumType.STRING)
     private Level level;
 
     // Валюты
     private long fireworks; // фейерверки
+    private long fireworksMax;
     private long mandarins; // мандарины
+    private long mandarinsMax;
     private long tickets; // билеты
+
+    // строка прогресса
+    private String progressString;
 
     // Привязанные сущности
     @OneToMany(mappedBy = "entryBy", cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<MarkerLog> markers = new ArrayList<>(); // логирование подтверждения
-    @OneToMany(mappedBy = "openedBy", cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(mappedBy = "entryBy", cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<LotteryLog> lotteries = new ArrayList<>(); // логирование участия в лотерее
+    @OneToMany(mappedBy = "entryBy", cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
+    private List<EntryLog> entries = new ArrayList<>();
+
+    public void addMarkerLog(MarkerLog log) {
+        markers.add(log);
+    }
+
+    public void addLotteryLog(LotteryLog log) {
+        lotteries.add(log);
+    }
+
+    public void addEntryLog(EntryLog log) {
+        entries.add(log);
+    }
+
+    public static User newUser(String dtprf) {
+        User user = new User();
+        user.dtprf = dtprf;
+        user.group = null;
+        user.level = null;
+        user.fireworks = 0;
+        user.fireworksMax = 0;
+        user.mandarins = 0;
+        user.mandarinsMax = 0;
+        user.tickets = 0;
+        user.progressString = "";
+        return user;
+    }
+
+    public static User newUser(String dtprf, Group group, Level level) {
+        User user = newUser(dtprf);
+        user.setGroup(group);
+        user.setLevel(level);
+        return user;
+    }
 
     // Создать пользователя из DTO
     public static User fromDto(UserDto dto) {
@@ -46,6 +87,7 @@ public class User {
         user.fireworks = dto.fireworks();
         user.mandarins = dto.mandarins();
         user.tickets = dto.tickets();
+        user.progressString = "";
         return user;
     }
 
@@ -58,6 +100,7 @@ public class User {
         user.fireworks = 0;
         user.mandarins = 0;
         user.tickets = 0;
+        user.progressString = "";
         return user;
     }
 }

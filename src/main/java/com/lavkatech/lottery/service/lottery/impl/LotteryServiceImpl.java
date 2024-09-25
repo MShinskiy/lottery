@@ -1,10 +1,9 @@
-package com.lavkatech.lottery.service.impl;
+package com.lavkatech.lottery.service.lottery.impl;
 
 import com.lavkatech.lottery.entity.Lottery;
 import com.lavkatech.lottery.entity.dto.LotteryResult;
 import com.lavkatech.lottery.repository.LotteryRepository;
-import com.lavkatech.lottery.service.LotteryService;
-import com.lavkatech.lottery.service.db.LogService;
+import com.lavkatech.lottery.service.lottery.LotteryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Retryable;
@@ -31,10 +30,10 @@ public class LotteryServiceImpl implements LotteryService {
     )
     @Transactional(isolation = Isolation.SERIALIZABLE)
     @Override
-    public LotteryResult getLotteryResult() {
+    public LotteryResult getLotteryResult() throws SQLException {
         Lottery l = getLotteryEntity();
-        long order = l.getCurrentOrder();
         l.incrementOrder();
+        long order = l.getCurrentOrder();
         lotteryRepo.save(l);
         long value = calcWinning.apply(order);
         return new LotteryResult(order, value);

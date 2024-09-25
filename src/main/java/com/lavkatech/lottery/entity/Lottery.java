@@ -14,7 +14,7 @@ public class Lottery {
 
     public Lottery() {
         this.totalWinnings = 0L;
-        this.currentOrder = 1L;
+        this.currentOrder = 0L;
     }
 
     @Id

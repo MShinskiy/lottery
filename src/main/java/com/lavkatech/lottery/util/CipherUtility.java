@@ -33,6 +33,10 @@ public class CipherUtility {
         } catch (JsonProcessingException e) {
             log.error("Invalid JSON for encoded query: {}", queryJson, e);
             return null;
+        } catch (IllegalArgumentException e) {
+            log.error("Received query: {}", query);
+            log.error("Invalid JSON for encoded query: {}", queryJson, e);
+            return null;
         }
     }
 
@@ -45,6 +49,8 @@ public class CipherUtility {
         //Decipher query parameter
         if(query.startsWith("query="))
             query = query.replace("query=", "");
+        if(query.contains(" "))
+            query = query.replace(" ", "+");
         String res;
         String param = URLDecoder.decode(query.replace("query=", ""), StandardCharsets.UTF_8);
         res = decrypt(param, initVector, key);
@@ -77,8 +83,8 @@ public class CipherUtility {
     }
 
     //AES256CBC Message encryption
-    public static String encrypt(String input, String key,
-                                 String initVector) throws NoSuchPaddingException, NoSuchAlgorithmException,
+    public static String encrypt(String input, String initVector,
+                                 String key) throws NoSuchPaddingException, NoSuchAlgorithmException,
             InvalidAlgorithmParameterException, InvalidKeyException,
             BadPaddingException, IllegalBlockSizeException {
         IvParameterSpec iv = new IvParameterSpec(initVector.getBytes(StandardCharsets.UTF_8));
