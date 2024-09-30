@@ -34,8 +34,9 @@ public class LotteryServiceImpl implements LotteryService {
         Lottery l = getLotteryEntity();
         l.incrementOrder();
         long order = l.getCurrentOrder();
-        lotteryRepo.save(l);
         long value = calcWinning.apply(order);
+        l.addWinnings(value);
+        lotteryRepo.save(l);
         return new LotteryResult(order, value);
     }
 

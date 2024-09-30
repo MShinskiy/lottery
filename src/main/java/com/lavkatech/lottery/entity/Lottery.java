@@ -29,4 +29,7 @@ public class Lottery {
     public void incrementOrder() {
         this.currentOrder++;
     }
+    public void addWinnings(long winnings) {
+        this.totalWinnings += winnings;
+    }
 }

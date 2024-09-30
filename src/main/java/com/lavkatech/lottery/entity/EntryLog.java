@@ -21,7 +21,7 @@ public class EntryLog extends Log{
                 getEntryBy().getDtprf(),
                 getEntryOn().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")),
                 getEntryOn().format(DateTimeFormatter.ofPattern("HH:mm:ss")),
-                getEntryOn().format(DateTimeFormatter.ofPattern("yyyyy.MM.dd HH:mm:ss.SSSSSS"))
+                getEntryOn().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss.SSSSSS"))
         );
     }
 }

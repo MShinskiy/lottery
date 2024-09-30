@@ -180,10 +180,16 @@ b {
 .card-btn-btn {
     font-weight: bold;
     padding: 8px 32px;
-    background: rgb(150, 225, 112);
+    background: grey;
     border-radius: 8px;
     border: 1px solid var(--primary);
     margin: 0.5em 0;
+}
+.bg-green {
+    background: rgb(150, 225, 112);
+}
+.bg-orange {
+    background: rgb(235, 147, 39);
 }
 .card-progressbar {
     width: 90%;
@@ -371,7 +377,7 @@ b {
     width: 100%;
     height: 100%;
     z-index: 1;
-    background-color: #9ce64d;
+    background-color: #c5c3e9;
     border-radius: 16px;
     display: flex;
     justify-content: center;

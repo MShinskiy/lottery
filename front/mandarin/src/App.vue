@@ -78,11 +78,11 @@ import MyLotery from './MyLotery.vue';
             </div>
           </div>
           <div class="card-btn">
-            <div v-if="!challengeAccepted" class="card-btn-btn"
+            <div v-if="!challengeAccepted" class="card-btn-btn bg-orange"
                 :class="[challengeBtnTime ? 'btnTime' : '', challengeBtn ? 'btnchallenge' : '']" @click="challenge()">
               Принять вызов!
             </div>
-            <div v-else class="card-btn-btn">
+            <div v-else class="card-btn-btn bg-green">
               Подтверждено!
             </div>
           </div>
