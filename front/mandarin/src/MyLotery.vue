@@ -11,7 +11,7 @@
     <canvas ref="maskCanvas" :style="{ position: 'absolute', left: '55px', top: '27px', pointerEvents: ticketsAvailable == 0 ? 'none' : 'auto' }"></canvas>
 
     <div v-if="drawPercent > 50" class="lucky-message" :class="[isLuckyMessage ? 'luck' : 'unluck']">
-      {{ isLuckyMessage ? 'СЧАСТЛИВЫЙ БИЛЕТ!' : 'Пусто. Попробуйте снова!' }}
+      {{ isLuckyMessage ? 'СЧАСТЛИВЫЙ БИЛЕТ!' : 'Попробуйте снова!' }}
     </div>
 
     <div @click="refreshTicket" class="card-block btn-update">

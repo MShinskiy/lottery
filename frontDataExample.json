@@ -1,0 +1,17 @@
+{
+  "dtprf": "DTPRF0000000",
+  "query": "oQDo30hlaefViLa++Nph3g==",
+  "group": "PARTHER",
+  "level": "HIGH",
+  "ticketsAvail": 2,
+  "ticketsTotal": 10,
+  "fireworks": 50,
+  "mandarins": 50,
+  "challengeAccepted": false,
+  "history": [
+    {
+      "order": 153,
+      "value": 0
+    }
+  ]
+}

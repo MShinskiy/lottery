@@ -19,13 +19,13 @@ import MyLotery from './MyLotery.vue';
     </div>
     <div class="container">
       <div class="second-head">
-        Описание активности
+        Собирайте награды, открывайте билеты и получайте баллы
       </div>
     </div>
     <div class="container">
       <div class="card-block">
         <div v-if="(currentValueFireworks >= maxValueFireworks) && (maxValueFireworks != 0) && !ModalActive" class="challenge-done">
-          Поздравляем, вы собрали максимум фейерверков!<br>
+          Поздравляем, вы собрали максимум фейерверков ({{ maxValueFireworks }} шт)!<br>
           Продолжайте открывать билеты, чтобы получить баллы и побороться за главный приз!
         </div>
 
@@ -59,7 +59,7 @@ import MyLotery from './MyLotery.vue';
       </div>
       <div class="card-block">
         <div v-if="(currentValueMandarin >= maxValueMandarin) && (maxValueMandarin != 0) && !ModalActive" class="challenge-done">
-          Поздравляем, вы собрали максимум мандаринов!<br>
+          Поздравляем, вы собрали максимум мандаринов ({{ maxValueMandarin }} шт)!<br>
           Продолжайте открывать билеты, чтобы получить баллы и побороться за главный приз!
         </div>
 
@@ -134,15 +134,15 @@ import MyLotery from './MyLotery.vue';
       <div class="info-modal-contant-section">
         <div class="info-modal-contant-section-head">
           <div>дополнительное задание</div>
-          <div>ваш прогресс: {{ progressString }}</div>
+          <div>ваш прогресс: <span v-html="progressString"></span></div>
         </div>
-        <p class="info-modal-contant-section-text">{{ houseData1 }}</p>
+        <p class="info-modal-contant-section-text" v-html="houseData1"></p>
       </div>
       <div class="info-modal-contant-section info-modal-contant-section-two">
-        <p class="info-modal-contant-section-text"> {{ houseData2 }}</p>
+        <p class="info-modal-contant-section-text" v-html="houseData2"></p>
       </div>
       <div class="info-modal-contant-section">
-        <p class="info-modal-contant-section-text"><b>Дата обновления: </b>{{ houseData4 }}</p>
+        <p class="info-modal-contant-section-text"><b>Дата обновления: </b><span v-html="houseData4"></span></p>
       </div>
     </div>
   </div>
@@ -154,7 +154,17 @@ import MyLotery from './MyLotery.vue';
           <div>дополнительное задание</div>
           <div>ваш прогресс: 2/3</div>
         </div> -->
-        <p class="info-modal-contant-section-text">Какой-то текст</p>
+        <div class="info-modal-contant-section-text">
+          <p style="margin-bottom: 8px;">Получайте по одному фейерверку за:</p>
+
+          <ul style="margin-bottom: 8px;">
+            <li>- Каждые 10 корректных чеков;</li>
+            <li>- Каждые 2 регистрации в Q Club;</li>
+            <li>- Каждых 2 уникальных клиентов, которые воспользовались фишкой.</li>
+          </ul>
+
+          <p>Накопите 20 фейерверков и заработайте 2000 баллов!</p>
+        </div>
       </div>
     </div>
   </div>
@@ -226,7 +236,7 @@ import MyLotery from './MyLotery.vue';
   </div>
 
   <div class="bg-page">
-    <img src="./img/bg.jpg" alt="Фон">
+    <img src="./img/bg_blur.jpg" alt="Фон">
   </div>
   <img src="./img/cardBG.png" style="display: none;">
 </template>
@@ -317,7 +327,7 @@ export default {
       const jsonEl = document.getElementById("json");
       this.data = JSON.parse(jsonEl.innerText);
       // Тест
-      //this.data = JSON.parse('{"dtprf":"123","query":"JwJWamF432UmpbwPgp85rEV2jC+XaFoLaMhn7UC1NiW04NIEUD0mUTLaFJCyICmApUXJXJxsvoAvLqPbgJOz+4rc332IhCqblMOtRv+r3BdkxWoCgPZBPAtnuPMWVXfSt0W/cwTT/sQJTOFthlxnGq1rux8vG9F6oL1s1YFTytHqNyQ4Cn6AvYmXPw4CTrApz6gH9fZT0V9ZbjGfYHe2sdS8g4gZQjvtjGs4vEetxEI=","group":"OTHER","level":"LOW","ticketsAvail":75,"ticketsTotal":105,"mandarins":0,"fireworks":0,"challengeAccepted":true,"history":[{"order":1,"value":0},{"order":2,"value":0},{"order":3,"value":0},{"order":4,"value":0},{"order":5,"value":500},{"order":57,"value":0},{"order":58,"value":0},{"order":59,"value":0},{"order":60,"value":500},{"order":61,"value":0},{"order":62,"value":0},{"order":63,"value":0},{"order":64,"value":0},{"order":65,"value":500},{"order":66,"value":0},{"order":67,"value":0},{"order":68,"value":0},{"order":69,"value":0},{"order":70,"value":500},{"order":71,"value":0},{"order":72,"value":0},{"order":73,"value":0},{"order":74,"value":0},{"order":75,"value":500},{"order":76,"value":0},{"order":77,"value":0},{"order":78,"value":0},{"order":79,"value":0},{"order":80,"value":500},{"order":81,"value":0}],"house":{"name":"САЛОН АПГРЕЙД","description":"Сейчас задание в этом доме недоступно. Обратитесь к своему торговому представителю ФМСМ, чтобы добавить задание на следующий период.","tasksComplete":0,"tasksTotal":0,"maxCoins":0,"caption":"","tasks":[],"buttons":[]}}');
+      // this.data = JSON.parse('{"dtprf":"123","query":"JwJWamF432UmpbwPgp85rEV2jC+XaFoLaMhn7UC1NiW04NIEUD0mUTLaFJCyICmApUXJXJxsvoAvLqPbgJOz+4rc332IhCqblMOtRv+r3BdkxWoCgPZBPAtnuPMWVXfSt0W/cwTT/sQJTOFthlxnGq1rux8vG9F6oL1s1YFTytHqNyQ4Cn6AvYmXPw4CTrApz6gH9fZT0V9ZbjGfYHe2sdS8g4gZQjvtjGs4vEetxEI=","group":"OTHER","level":"LOW","ticketsAvail":75,"ticketsTotal":105,"mandarins":0,"fireworks":0,"challengeAccepted":true,"history":[{"order":1,"value":0},{"order":2,"value":0},{"order":3,"value":0},{"order":4,"value":0},{"order":5,"value":500},{"order":57,"value":0},{"order":58,"value":0},{"order":59,"value":0},{"order":60,"value":500},{"order":61,"value":0},{"order":62,"value":0},{"order":63,"value":0},{"order":64,"value":0},{"order":65,"value":500},{"order":66,"value":0},{"order":67,"value":0},{"order":68,"value":0},{"order":69,"value":0},{"order":70,"value":500},{"order":71,"value":0},{"order":72,"value":0},{"order":73,"value":0},{"order":74,"value":0},{"order":75,"value":500},{"order":76,"value":0},{"order":77,"value":0},{"order":78,"value":0},{"order":79,"value":0},{"order":80,"value":500},{"order":81,"value":0}],"house":{"name":"САЛОН АПГРЕЙД","description":"Сейчас задание в этом доме недоступно. Обратитесь к своему торговому представителю ФМСМ, чтобы добавить задание на следующий период.","tasksComplete":0,"tasksTotal":0,"maxCoins":0,"caption":"","tasks":[],"buttons":[]}}');
       this.token = this.data.query;
       this.dtprf = this.data.dtprf;
       this.currentValueFireworks = this.data.fireworks > 0 ? this.data.fireworks : 0;
@@ -353,10 +363,24 @@ export default {
       const timeDiff = providedDate - today;
 
       // Convert time difference to days
-      return Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+      let days = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+      return days > 0 ? days : 0;
     },
     backHome() {
-      window.location = 'https://dte.pmruservice.com/dte-main/game';
+      // Переход домой через форму
+      let targetUrl = '/townofgames/play';
+      let form = document.createElement('form');
+      form.setAttribute('action', targetUrl);
+      form.setAttribute('method', 'POST');
+
+      let queryInput = document.createElement('input');
+      queryInput.setAttribute('type', 'hidden');
+      queryInput.setAttribute('name', 'query');
+      queryInput.setAttribute('value', this.token);
+      form.appendChild(queryInput);
+
+      document.body.appendChild(form);
+      form.submit();
     },
     lotteryHandler(res) {
       this.addHistoryEntry(res);

@@ -20,7 +20,6 @@
 
 <div class="d-flex justify-content-center" style="margin: 10px 0 10px 0">
     <form method="get">
-        <button class="btn btn-info" th:formaction="@{/administration/edit}">К панели редактирования</button>
         <button class="btn btn-secondary" th:method="post" th:formaction="@{/logout}">Выход</button>
     </form>
 </div>
@@ -124,10 +123,10 @@
                                th:value="${marker.level}" name="level" readonly>
                     </td>
                     <td>
-                        <input type="text" th:value="${marker.marker}" disabled>
+                        <input type="text" class="form-control" th:value="${marker.marker}" readonly>
                     </td>
                     <td>
-                        <input type="date" class="form-control" th:value="${marker.expOn}" disabled/>
+                        <input type="date" class="form-control" th:value="${marker.expOn}" readonly/>
                     </td>
                     <td>
                         <input type="text" class="form-control"
