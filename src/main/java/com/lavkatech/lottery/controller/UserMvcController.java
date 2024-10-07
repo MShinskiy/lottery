@@ -7,6 +7,8 @@ import com.lavkatech.lottery.entity.User;
 import com.lavkatech.lottery.entity.dto.DecodedUserQuery;
 import com.lavkatech.lottery.entity.dto.FrontDto;
 import com.lavkatech.lottery.entity.dto.HouseDto;
+import com.lavkatech.lottery.entity.enumeration.Group;
+import com.lavkatech.lottery.entity.enumeration.Level;
 import com.lavkatech.lottery.exception.UserNotFoundException;
 import com.lavkatech.lottery.service.db.UserService;
 import com.lavkatech.lottery.util.CipherUtility;
@@ -47,7 +49,23 @@ public class UserMvcController {
 
         try {
             HouseDto houseDto = mapper.readerFor(HouseDto.class).readValue(houseDtoJson);
-            User user = userService. getOrCreateUser(decodedQuery.dtprf(), decodedQuery.group(), decodedQuery.level());
+
+            // Не допускать отсутствие группы и уровня
+            Group group;
+            try {
+                group = decodedQuery.group() == null ? Group.OTHER : decodedQuery.group();
+            } catch (IllegalArgumentException e) {
+                group = Group.OTHER;
+            }
+
+            Level level;
+            try {
+                level = decodedQuery.level() == null ? Level.LOW : decodedQuery.level();
+            } catch (IllegalArgumentException e) {
+                level = Level.LOW;
+            }
+
+            User user = userService.getOrCreateUser(decodedQuery.dtprf(), group, level);
             Boolean isChallengeAccepted = userService.isChallengeAccepted(decodedQuery.dtprf());
             LocalDate expOn = userService.getChallengeExpiringDate(decodedQuery.dtprf());
             String dateString = expOn.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));

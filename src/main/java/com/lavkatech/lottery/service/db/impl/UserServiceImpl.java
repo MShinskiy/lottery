@@ -21,6 +21,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
@@ -187,15 +188,18 @@ public class UserServiceImpl implements UserService {
         userRepo.saveAllAndFlush(users);
     }
 
+    @Transactional
     @Override
     public void acceptChallenge(String dtprf) throws UserNotFoundException {
+        if(isChallengeAccepted(dtprf))
+            return;
         User user = loadUser(dtprf);
         String currentMarker = markerService.getCurrentMarker(user.getGroup(), user.getLevel()).getMarker();
         user.addMarkerLog(new MarkerLog(currentMarker, user));
-        //logService.createMarkerLog(user, currentMarker);
         userRepo.save(user);
     }
 
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     @Override
     public Boolean isChallengeAccepted(String dtprf) throws UserNotFoundException {
         User user = loadUser(dtprf);

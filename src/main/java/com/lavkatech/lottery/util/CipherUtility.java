@@ -26,6 +26,12 @@ public class CipherUtility {
 
     public static DecodedUserQuery encodedStringToPojo(String query, String initVector, String key)  {
         String queryJson = unwrapEncodedString(query, initVector, key);
+        if(queryJson != null) {
+            queryJson = queryJson.replaceAll("(?i)other", "OTHER");
+            queryJson = queryJson.replaceAll("(?i)partner", "PARTNER");
+            queryJson = queryJson.replaceAll("(?i)low", "LOW");
+            queryJson = queryJson.replaceAll("(?i)high", "HIGH");
+        }
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JavaTimeModule());
         try {
