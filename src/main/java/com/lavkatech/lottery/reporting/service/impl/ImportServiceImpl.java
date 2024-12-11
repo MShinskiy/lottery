@@ -57,7 +57,9 @@ public class ImportServiceImpl implements ImportService {
                 //Переопределить баланс пользователя
                 user.setFireworks(dto.getFireworks());
                 user.setMandarins(dto.getMandarins());
-                user.setTickets(dto.getTickets());
+                //Импорт СУММЫ билетов
+                int opened = user.getLotteries().size();
+                user.setTickets(dto.getTickets() - opened);
 
                 count++;
             }

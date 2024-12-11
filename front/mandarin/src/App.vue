@@ -182,7 +182,7 @@ import MyLotery from './MyLotery.vue';
       <div>за билетом</div>
     </div>
     <div class="second-head">
-      доступно к открытию: {{ ticketsAvailable }}
+      доступно к открытию: {{ ticketsAvailable < 0 ? 0 : ticketsAvailable }}
     </div>
     <div class="container">
       <div class="card-block card-block-bilet">
@@ -336,7 +336,7 @@ export default {
       this.maxValueMandarin = this.data.mandarinsMax;
       this.challengeAccepted = this.data.challengeAccepted;
       this.progressString = this.data.progressString;
-      this.ticketsTotal = this.data.ticketsTotal;
+      this.ticketsTotal = this.data.ticketsTotal < 0 ? 0 : this.data.ticketsTotal;
       this.ticketsAvailable = this.data.ticketsAvail;
       this.ticketsOpened = this.data.ticketsTotal - this.data.ticketsAvail;
       this.daysUntilExpiration = this.daysUntil(this.data.markerExpiringOn);
